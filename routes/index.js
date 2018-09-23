@@ -263,7 +263,7 @@ module.exports = function(app){
       form: {
         "texto_chave": req.body.texto_chave,
         "idCliente" : req.body.idCliente,
-        "resultado_vr": req.body.resultado_vr,
+        // "resultado_vr": JSON.stringify(req.body.resultado_vr),
         "url" : ""
       }
     }
@@ -275,7 +275,6 @@ module.exports = function(app){
       console.log(body)
 
       res.send('1')
-
 
     })
 
