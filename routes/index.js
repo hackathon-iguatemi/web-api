@@ -6,6 +6,7 @@ module.exports = function(app){
   let igScrap = require('instagram-scraping');
   let fs = require('fs')
   var uuid = require('uuid')
+  var rp = require('request-promise').defaults({simple: false})
   
   var multer = require('multer')
   
@@ -247,7 +248,36 @@ module.exports = function(app){
 
     console.log(req.body)
 
-    res.send('1')
+    // res.send('1')
+
+//     { idCliente: '1',
+//  resultado_vr: '[{"articles":[{"bounding_box":{"y0":160,"x1":414,"x0":224,"y1":496},"primaryColor":"#241510","article_name":"tank top","confidence":0.97983783483505249}],"imageURL":"https:\\/\\/diariodegoias.com.br\\/images\\/stories\\/imagens\\/2017\\/outubros\\/anitta_roupa_curta_.jpg"},{"articles":[{"bounding_box":{"y0":108,"x1":460,"x0":363,"y1":231},"primaryColor":"#e6bdac","article_name":"tank top","confidence":0.50475949048995972},{"bounding_box":{"y0":211,"x1":271,"x0":138,"y1":285},"primaryColor":"#d8a68d","article_name":"shorts","confidence":0.81602275371551514},{"bounding_box":{"y0":94,"x1":279,"x0":122,"y1":258},"primaryColor":"#edc2b2","article_name":"blouse","confidence":0.85293906927108765}],"imageURL":"http:\\/\\/s2.glbimg.com\\/jD9zeQccxQaCanfUcmL-w-CnJ6o=\\/620x465\\/s.glbimg.com\\/jo\\/eg\\/f\\/original\\/2015\\/07\\/05\\/manu1622.jpg"}]',
+// 2018-09-23T15:01:11.783235+00:00 app[web.1]:   texto_chave: 'Anitta' }
+
+    let url = 'http://hackathon-iguatemi.mybluemix.net/api/broadcast'
+
+    let requestOptions = {
+      uri: url,
+      method: 'post',
+      resolveWithFullResponse: true,
+      form: {
+        "texto_chave": req.body.texto_chave,
+        "idCliente" : req.body.idCliente,
+        "resultado_vr": req.body.resultado_vr,
+        "url" : ""
+      }
+    }
+
+    rp(requestOptions).then((response) => {
+
+      let body = response.body
+
+      console.log(body)
+
+      res.send('1')
+
+
+    })
 
   })
 
