@@ -243,6 +243,14 @@ module.exports = function(app){
     
   })
 
+  app.post('/api/broadcast', (req, res) => {
+
+    console.log(req.body)
+
+    res.send('1')
+
+  })
+
   app.get('/get_image_product/:uuid', (req, res) => {
     
     var _uuid = req.params.uuid
